@@ -1,0 +1,46 @@
+version: '3'
+services:
+  node0:
+    build:
+      context: .
+      dockerfile: Dockerfile.dpo2
+    image: dpo2
+    volumes:
+      - ./peers.json:/dpo/peers.json:ro
+      - ./dso.json:/dpo/dso.json:ro
+      - ./rpc.json:/dpo/rpc.json:ro
+      - ./benchmark:/dpo/benchmark
+    command: ["-id", "0", "-peers", "/dpo/peers.json", "-ntx", "10", "-benchmark", "/dpo/benchmark/node0.csv", "-dsoFile", "/dpo/rpc.json"]
+  node1:
+    build:
+      context: .
+      dockerfile: Dockerfile.dpo2
+    image: dpo2
+    volumes:
+      - ./peers.json:/dpo/peers.json:ro
+      - ./dso.json:/dpo/dso.json:ro
+      - ./rpc.json:/dpo/rpc.json:ro
+      - ./benchmark:/dpo/benchmark
+    command: ["-id", "1", "-peers", "/dpo/peers.json", "-ntx", "10", "-dsoFile", "/dpo/rpc.json", "-epochPeriod", "3000", "-benchmark", "/dpo/benchmark/node1.csv"]
+  node2:
+    build:
+      context: .
+      dockerfile: Dockerfile.dpo2
+    image: dpo2
+    volumes:
+      - ./peers.json:/dpo/peers.json:ro
+      - ./dso.json:/dpo/dso.json:ro
+      - ./rpc.json:/dpo/rpc.json:ro
+      - ./benchmark:/dpo/benchmark
+    command: ["-id", "2", "-peers", "/dpo/peers.json", "-ntx", "10", "-dsoFile", "/dpo/rpc.json", "-benchmark", "/dpo/benchmark/node2.csv"]
+  node3:
+    build:
+      context: .
+      dockerfile: Dockerfile.dpo2
+    image: dpo2
+    volumes:
+      - ./peers.json:/dpo/peers.json:ro
+      - ./dso.json:/dpo/dso.json:ro
+      - ./rpc.json:/dpo/rpc.json:ro
+      - ./benchmark:/dpo/benchmark
+    command: ["-id", "3", "-peers", "/dpo/peers.json", "-ntx", "10", "-dsoFile", "/dpo/rpc.json", "-benchmark", "/dpo/benchmark/node3.csv"]
